@@ -11,19 +11,24 @@
     $sf = ( isset($_GET["sf"]) && $_GET["sf"] != "" ) ? $_GET["sf"] : "";
 
     $like_query = "";
+    $params = [];
     if ($sn != "" && $sf != "") {
         switch ($sn) {
             case 1:
-                $like_query = " AND (subject LIKE '%".$sf."%' OR content LIKE '%".$sf."%')"; // 제목 + 내용
+                $like_query = " AND (subject LIKE CONCAT('%', :sf, '%') OR content LIKE CONCAT('%', :sf2, '%'))"; // 제목 + 내용
+                $params = [":sf" => $sf, "sf2" => $sf];
                 break;
             case 2:
-                $like_query = " AND (subject LIKE '%".$sf."%')"; // 제목
+                $like_query = " AND (subject LIKE CONCAT('%', :sf, '%'))"; // 제목
+                $params = [":sf" => $sf];
                 break;
             case 3:
-                $like_query = " AND (content LIKE '%".$sf."%')"; // 내용
+                $like_query = " AND (content LIKE CONCAT('%', :sf, '%'))"; // 내용
+                $params = [":sf" => $sf];
                 break;
             case 4:
-                $like_query = " AND (name = '".$sf."')"; // 작성자
+                $like_query = " AND (name = :sf)"; // 작성자
+                $params = [":sf" => $sf];
                 break;
         }
     }
@@ -44,7 +49,7 @@
     
     $sql = "SELECT COUNT(*) AS cnt FROM mboard WHERE code='".$code."'".$like_query.";";
     $stmt = $conn -> prepare($sql);
-    $stmt -> execute();
+    $stmt -> execute($params);
     $row = $stmt -> fetch(PDO::FETCH_ASSOC);
     $total = $row["cnt"];
 
@@ -56,7 +61,7 @@
 
     $sql = "SELECT * FROM mboard WHERE code='".$code."'".$like_query." ORDER BY idx DESC LIMIT $start, $page_limit";
     $stmt = $conn -> prepare($sql);
-    $stmt -> execute();
+    $stmt -> execute($params);
     $rows = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
     $conn = null;

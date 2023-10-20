@@ -45,7 +45,7 @@
         <!-- 등록/목록 버튼 -->
         <div class="mt-2 d-flex gap-2 justify-content-end">
             <button class="btn btn-primary" id="btn_submit">등록</button>
-            <button class="btn btn-secondary">목록</button>
+            <button class="btn btn-secondary" id="btn_list">목록</button>
         </div>
     </div>
 
@@ -54,8 +54,27 @@
 
         // 핸들링 할 버튼
         const btn_submit = document.querySelector("#btn_submit");
+        const btn_list = document.querySelector("#btn_list");
 
-        // 버튼 클릭시 이벤트 발생
+        /**
+         * URL code 값 가져오기
+         * replace : A 값을 B 값으로 바꾼다.
+         * split : 해당 기준으로 짜른 후 배열로 반환한다
+         * f1.append의 code 값 생성을 위한 작업
+         */
+        const codeValue = window.location.search.replace("?", "").split(/[=?&]/); // URL Query ? 이후의 값을 가져올 수 있다
+        let param = {}; // 객체 생성
+        for (let i = 0; i < codeValue.length; i++) {
+            param[codeValue[i]] = codeValue[++i]; // 짝수는 key값, 짝수는 value값 :: 배열로 받은것을 객체 타입으로 작업
+        }
+
+        // 목록 버튼 클릭시 이벤트 발생
+        btn_list.addEventListener("click", () => {
+            self.location.href = "./list.php?code=" + param["code"];
+        });
+
+
+        // 등록 버튼 클릭시 이벤트 발생
         btn_submit.addEventListener("click", () => {
             
             // 핸들링 할 태그들 
@@ -76,18 +95,6 @@
                 subject.focus();
             } else if (markupStr == "<p><br></p>") {
                 alert("내용을 입력해주세요");
-            }
-
-            // URL code 값 가져오기
-            /**
-             * replace : A 값을 B 값으로 바꾼다.
-             * split : 해당 기준으로 짜른 후 배열로 반환한다
-             * f1.append의 code 값 생성을 위한 작업
-             */
-            const codeValue = window.location.search.replace("?", "").split(/[=?&]/); // URL Query ? 이후의 값을 가져올 수 있다
-            let param = {}; // 객체 생성
-            for (let i = 0; i < codeValue.length; i++) {
-                param[codeValue[i]] = codeValue[++i]; // 짝수는 key값, 짝수는 value값 :: 배열로 받은것을 객체 타입으로 작업
             }
 
             // form 태그 만들어서 append 시킨 다음에 전송
