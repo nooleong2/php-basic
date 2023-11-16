@@ -1,0 +1,7 @@
+Error: [2] Undefined variable $undefinedVariable - /Applications/XAMPP/xamppfiles/htdocs/_php/basic/60_error_handler.php:27
+Error: [2] Undefined variable $undefinedVariable - /Applications/XAMPP/xamppfiles/htdocs/_php/basic/60_error_handler.php:27
+Error: [2] Undefined variable $undefinedVariable - /Applications/XAMPP/xamppfiles/htdocs/_php/basic/60_error_handler.php:27
+Error: [2] Undefined variable $undefinedVariable - /Applications/XAMPP/xamppfiles/htdocs/_php/basic/60_error_handler.php:272023-11-16
+Error: [2] Undefined variable $undefinedVariable - /Applications/XAMPP/xamppfiles/htdocs/_php/basic/60_error_handler.php:27datetime: 2023-11-16 15:04:11
+Error: [2] Undefined variable $undefinedVariable - /Applications/XAMPP/xamppfiles/htdocs/_php/basic/60_error_handler.php:27 datetime: 2023-11-16 15:05:11
+Error: [2] Undefined variable $undefinedVariable - /Applications/XAMPP/xamppfiles/htdocs/_php/basic/60_error_handler.php:27 2023-11-16 15:05:11
